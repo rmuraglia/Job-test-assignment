@@ -65,7 +65,7 @@ all_working.drop('X23', axis=1, inplace=True)
 
 # also drop X15: in test set, dates are encoded differently, and it is unclear if the 15 refers to a date or a year.
 # given that X15 is actually a reasonably strong predictor, I would rather not give potentially erroneous information to the model
-all_working.drop('X15', axis=1, inplace=True)
+# all_working.drop('X15', axis=1, inplace=True)
 
 ##
 # 1.2: Parse data to be suitable for computation
@@ -122,7 +122,7 @@ def date_to_ordinal(series) :
     corrected_dates = [i-century if i>datetime.today() else i for i in parsed_dates]
     ordinals = [i.toordinal() for i in corrected_dates]
     series_out = pd.Series(ordinals, index=series.index, name=series.name)
-    return series_out    
+    return series_out
 
 X1_clean = strip_prc(all_working['X1'])
 X4_clean = strip_dollar(all_working['X4'])
@@ -137,7 +137,7 @@ X9_le, X9_clean = encode_ordinal(all_working['X9']) # na encoded as 0 - see X9_l
 X11_fracs, X11_clean = parse_X11(all_working['X11'])
 X13_clean = all_working['X13'].copy()
 X14_le, X14_enc, X14_clean = encode_categorical(all_working['X14'])
-# X15_clean = date_to_ordinal(all_working['X15'])
+X15_clean = date_to_ordinal(all_working['X15'])
 X17_le, X17_enc, X17_clean = encode_categorical(all_working['X17'])
 X20_le, X20_enc, X20_clean = encode_categorical(all_working['X20'])
 X21_clean = all_working['X21'].copy()
@@ -152,7 +152,7 @@ X30_clean = strip_prc(all_working['X30'])
 X31_clean = all_working['X31'].copy()
 X32_le, X32_clean = encode_ordinal(all_working['X32'])
 
-all_clean = pd.concat([X1_clean, X4_clean, X5_clean, X6_clean, X7_clean, X9_clean, X11_clean, X13_clean, X14_clean, X17_clean, X20_clean, X21_clean, X22_clean, X24_clean, X27_clean, X28_clean, X29_clean, X30_clean, X31_clean, X32_clean], axis=1) 
+all_clean = pd.concat([X1_clean, X4_clean, X5_clean, X6_clean, X7_clean, X9_clean, X11_clean, X13_clean, X14_clean, X15_clean, X17_clean, X20_clean, X21_clean, X22_clean, X24_clean, X27_clean, X28_clean, X29_clean, X30_clean, X31_clean, X32_clean], axis=1) 
 
 ##
 # 1.3: Impute missing values
@@ -258,6 +258,8 @@ test_raw = pd.read_csv(data_dir + 'Holdout for Testing.csv')
 test_working = test_raw.copy()
 test_working.drop(test_working.columns[[1, 2, 7, 9, 15, 17, 18]], axis=1, inplace=True)
 test_working.drop(test_working.columns[[7, 17, 18]], axis=1, inplace=True)
+test_working.drop('X23', axis=1, inplace=True)
+# test_working.drop('X15', axis=1, inplace=True)
 
 def encode_test_cat(series, le, enc) :
     series_ints = le.transform(series)
@@ -285,6 +287,14 @@ def encode_test_11(series, fracs) :
             series_out[i] = x.split()[0]
     return series_out
 
+def date_to_ordinal2(series) :
+    parsed_dates = [datetime.strptime(i, '%y-%b') for i in series]
+    century = timedelta(days = 36525)
+    corrected_dates = [i-century if i>datetime.today() else i for i in parsed_dates]
+    ordinals = [i.toordinal() for i in corrected_dates]
+    series_out = pd.Series(ordinals, index=series.index, name=series.name)
+    return series_out
+
 X4_test = strip_dollar(test_working['X4'])
 X5_proc = strip_dollar(test_working['X5'])
 X5_test = (X4_test>X5_proc).astype('int')
@@ -297,7 +307,7 @@ X9_test = encode_test_ord(test_working['X9'], X9_le)
 X11_test = encode_test_11(test_working['X11'], X11_fracs)
 X13_test = test_working['X13'].copy()
 X14_test = encode_test_cat(test_working['X14'], X14_le, X14_enc)
-# X15_test = date_to_ordinal(test_working['X15'])
+X15_test = date_to_ordinal2(test_working['X15'])
 X17_test = encode_test_cat(test_working['X17'], X17_le, X17_enc)
 X20_test = encode_test_cat(test_working['X20'], X20_le, X20_enc)
 X21_test = test_working['X21'].copy()
@@ -310,7 +320,7 @@ X30_test = strip_prc(test_working['X30'])
 X31_test = test_working['X31'].copy()
 X32_test = encode_test_ord(test_working['X32'], X32_le)
 
-test_clean = pd.concat([X4_test, X5_test, X6_test, X7_test, X9_test, X11_test, X13_test, X14_test, X17_test, X20_test, X21_test, X22_test, X24_test, X27_test, X28_test, X29_test, X30_test, X31_test, X32_test], axis=1)
+test_clean = pd.concat([X4_test, X5_test, X6_test, X7_test, X9_test, X11_test, X13_test, X14_test, X15_test, X17_test, X20_test, X21_test, X22_test, X24_test, X27_test, X28_test, X29_test, X30_test, X31_test, X32_test], axis=1)
 
 # impute missing utilization rates
 test_clean['X30'].fillna(X30_median, inplace=True)
