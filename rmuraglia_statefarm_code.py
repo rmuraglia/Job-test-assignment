@@ -201,7 +201,7 @@ y_train = y_clean[X_train.index]
 y_xval = y_clean.drop(X_train.index)
 
 """
-Part 2: Build LASSO regression model
+Part 2: Build LASSO regression model (produce and save)
 The LASSO is a linear model that enforces shrinkage and sparsity in the coefficients. Because of this, it is a very convenient model, as it accomplishes feature selection and regression simultaneously.
 """
 
@@ -225,7 +225,7 @@ lasso = lm.Lasso(alpha = best_alpha)
 lasso.fit(X_std, y_clean)
 
 """
-Part 3: Build decision tree regression model
+Part 3: Build decision tree regression model (produce and save)
 Decision trees can also be used for regression, and not just classification. Decision trees are convenient as they are intuitively easy to understand, and they perform very well with categorical data.
 """
 
@@ -331,7 +331,7 @@ test_std = scaler.transform(test_clean)
 X_test = pd.DataFrame(test_std, index=test_clean.index, columns=test_clean.columns)
 
 """
-Part 5: make predictions on unseen data
+Part 5: make predictions on unseen data (load and apply models)
 """
 
 lasso_predictions = lasso.predict(X_test)
@@ -377,7 +377,7 @@ ax3.plot(lasso_predictions, dtree_predictions, marker='o', linestyle='none')
 ax3.set_xlabel('LASSO'); ax3.set_ylabel('DTree')
 plt.show()
 
-# look at decision tree structure and decision rules for a shallow tree 
+# look at decision tree structure and decision rules for a shallow tree (full size tree is unwieldy to look at)
 import pydotplus
 from sklearn.externals.six import StringIO  
 
