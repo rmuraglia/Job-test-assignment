@@ -122,12 +122,16 @@ def date_to_ordinal(series) :
     corrected_dates = [i-century if i>datetime.today() else i for i in parsed_dates]
     ordinals = [i.toordinal() for i in corrected_dates]
     series_out = pd.Series(ordinals, index=series.index, name=series.name)
-    return series_out
+    return series_out    
 
 X1_clean = strip_prc(all_working['X1'])
 X4_clean = strip_dollar(all_working['X4'])
-X5_clean = strip_dollar(all_working['X5'])
-X6_clean = strip_dollar(all_working['X6'])
+X5_strip = strip_dollar(all_working['X5'])
+X5_clean = (X4_clean>X5_strip).astype('int')
+X5_clean.rename('X5', inplace=True)
+X6_strip = strip_dollar(all_working['X6'])
+X6_clean = (X5_strip>X6_strip).astype('int')
+X6_clean.rename('X6', inplace=True)
 X7_le, X7_clean = encode_ordinal(all_working['X7'])
 X9_le, X9_clean = encode_ordinal(all_working['X9']) # na encoded as 0 - see X9_le.classes_
 X11_fracs, X11_clean = parse_X11(all_working['X11'])
@@ -282,8 +286,12 @@ def encode_test_11(series, fracs) :
     return series_out
 
 X4_test = strip_dollar(test_working['X4'])
-X5_test = strip_dollar(test_working['X5'])
-X6_test = strip_dollar(test_working['X6'])
+X5_proc = strip_dollar(test_working['X5'])
+X5_test = (X4_test>X5_proc).astype('int')
+X5_test.rename('X5', inplace=True)
+X6_proc = strip_dollar(test_working['X6'])
+X6_test = (X5_test>X6_proc).astype('int')
+X6_test.rename('X6', inplace=True)
 X7_test = encode_test_ord(test_working['X7'], X7_le)
 X9_test = encode_test_ord(test_working['X9'], X9_le)
 X11_test = encode_test_11(test_working['X11'], X11_fracs)
