@@ -24,7 +24,7 @@ def print_hi(name, greeting='hello') :
 map(print_hi, friends)
 
 # Print sorted names out
-# fix 4: the sort command just sorts in place and doesn't return anything. if you want to print it ou, you have to call print on the list itself after sorting
+# fix 4: the sort command just sorts in place and doesn't return anything. if you want to print it out, you have to call print on the list itself after sorting
 friends.sort()
 print friends
 
