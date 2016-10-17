@@ -1,0 +1,90 @@
+\documentclass[12pt]{article}
+\usepackage{graphics, graphicx, tabularx, fancyhdr, amsmath, lastpage, indentfirst, lscape, algorithm, algorithmic, siunitx}
+\usepackage[margin=1in]{geometry}
+\usepackage[super, sort&compress, comma]{natbib}
+
+% define variable for OSX vs. Windows path to Dropbox folder
+% \def \dropboxpath {D:/Dropbox/} % for windows
+\def \dropboxpath {/Users/ryan/Dropbox/} % for osx
+
+% define spacing for paragraph indent and space between paragraphs
+% \setlength{\parindent}{4ex}
+% \setlength{\parskip}{0ex}
+
+% set custom header and footers
+\pagestyle{fancy}
+\fancyhf{} % remove current presets
+%\renewcommand{\headrulewidth}{0pt} %uncomment to remove header line separator
+\fancyhf[EOHL]{State Farm data scientist work assignment - write up} % evens, odds, header, left
+\fancyhf[EOHR]{Ryan Muraglia} % events, odds, header, right
+\fancyhf[EOFC]{\thepage / \pageref{LastPage}} % evens, odds, footer, center
+\setlength{\headheight}{15pt} % might throw a warning about minimum height: adjust this to fix
+
+% create custom method for delimiting days: draws a short centered line and aligns the new date to the right
+\newcommand{\newday}[1]{
+\centerline{ \rule{3in}{0.4pt}} 
+
+\hfill \emph{#1} \\
+}
+
+% redefine list structures to be more compact
+\let\oldenumerate\enumerate
+\renewcommand{\enumerate}{
+  \oldenumerate
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  % \vspace{-2ex}
+}
+\let\olditemize\itemize
+\renewcommand{\itemize}{
+  \olditemize
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  % \vspace{-2ex}
+}
+\let\olddescription\description
+\renewcommand{\description}{
+  \olddescription
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  % \vspace{-2ex}
+}
+
+% macro for red text for annotating drafts
+\usepackage{color}
+\newcommand{\redtext}[1]{
+  \textcolor{red}{#1}
+}
+
+\begin{document}
+
+\section{Model Comparison} % (fold)
+\label{sec:model_comparison}
+
+discuss pros/cons
+
+\subsection{LASSO} % (fold)
+\label{sub:lasso}
+
+% subsection lasso (end)
+
+\subsection{Decision Tree Regression} % (fold)
+\label{sub:decision_tree_regression}
+
+% subsection decision_tree_regression (end)
+
+% section model_comparison (end)
+
+\section{Design Choices} % (fold)
+\label{sec:design_choices}
+
+explain variable selection, transformations
+
+% section design_choices (end)
+
+\end{document}
+
+
