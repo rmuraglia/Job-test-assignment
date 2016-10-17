@@ -63,8 +63,8 @@ all_working.drop(all_working.columns[[7, 17, 18]], axis=1, inplace=True)
 # also drop X23: in test set, dates are encoded differently, and appear to be missing year information, which is critical
 all_working.drop('X23', axis=1, inplace=True)
 
-# also drop X15: in test set, dates are encoded differently, and it is unclear if the 15 refers to a date or a year.
-# given that X15 is actually a reasonably strong predictor, I would rather not give potentially erroneous information to the model
+# potentially drop X15: in test set, dates are encoded differently, and it is unclear if the 15 refers to a date or a year.
+# after consulting with Peter Laube from State Farm via email, I conclude that assuming the 15 refers to a year is a good assumption. I keep X15 in the model (keep next line commented out)
 # all_working.drop('X15', axis=1, inplace=True)
 
 ##
@@ -98,7 +98,7 @@ def encode_categorical(series) :
 
 def parse_X11(series) :
     # requires different parser from ordinal to handle inappropriate sort order and differently marked missing values
-    # first replace n/a values with samples drawn from the empirical distribution
+    # replace n/a values with samples drawn from the empirical distribution
     counts = series.value_counts()
     counts.drop('n/a', inplace=True)
     fracs = counts/sum(counts)
@@ -289,6 +289,7 @@ def encode_test_11(series, fracs) :
     return series_out
 
 def date_to_ordinal2(series) :
+    # alternate version of date_to_ordinal to handle YY-Mon formatted dates (instead of Mon-YY)
     parsed_dates = [datetime.strptime(i, '%y-%b') for i in series]
     century = timedelta(days = 36525)
     corrected_dates = [i-century if i>datetime.today() else i for i in parsed_dates]

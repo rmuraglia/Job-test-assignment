@@ -34,23 +34,7 @@
   \setlength{\itemsep}{1pt}
   \setlength{\parskip}{0pt}
   \setlength{\parsep}{0pt}
-  % \vspace{-2ex}
-}
-\let\olditemize\itemize
-\renewcommand{\itemize}{
-  \olditemize
-  \setlength{\itemsep}{1pt}
-  \setlength{\parskip}{0pt}
-  \setlength{\parsep}{0pt}
-  % \vspace{-2ex}
-}
-\let\olddescription\description
-\renewcommand{\description}{
-  \olddescription
-  \setlength{\itemsep}{1pt}
-  \setlength{\parskip}{0pt}
-  \setlength{\parsep}{0pt}
-  % \vspace{-2ex}
+  \vspace{-2ex}
 }
 
 % macro for red text for annotating drafts
@@ -64,15 +48,54 @@
 \section{Model Comparison} % (fold)
 \label{sec:model_comparison}
 
-discuss pros/cons
-
 \subsection{LASSO} % (fold)
 \label{sub:lasso}
+
+The LASSO is a variant of linear regression which uses an $\ell_1$ penalty term to enforce shrinkage and sparsity in the coefficients. 
+The objective function, which we minimize with respect to $\beta$ is:
+\begin{equation}
+  f_{LASSO}(\beta) = \sum (y - \beta X)^2 + \alpha \sum_{i=1}^p |\beta_i|
+\end{equation}
+where $\alpha$ controls the regularization strength, with higher values of $\alpha$ leading to more sparsity.
+
+Some pros of the LASSO are:
+\begin{enumerate}
+  \item Feature selection: due to the $\ell_1$ penalty term, regression coefficients can be zeroed out (as opposed to in Ridge regression, or Tikhonov regularization with uses an $\ell_2$ penalty term, where coefficients are shrunk towards zero, but rarely, if ever zeroed out).
+  \item High model interpretability: with fewer features with non-zero coefficients, we only need to focus on the role of a potentially small subset of covariates, allowing us to gain a stronger intuition of their impact.
+  \item Protection from overfitting: like other regularized regression techniques, the main benefit of the LASSO is to prevent overfitting by simplifying the regression model. In other words, the LASSO tends to be robust to the training data and learns similar models.
+\end{enumerate}
+
+Some cons of the LASSO are:
+\begin{enumerate}
+  \item $\alpha$ selection: we need to choose a value for the shrinkage parameter. We can overcome this drawback by using a cross validation scheme to choose a good value.
+  \item Non linear relationships: as with all linear regression methods, LASSO cannot accurately learn non-linear relationships without the introduction of modified features, like polynomial expansions or log transforms.
+  \item Non-sparse situations: in the event that many of the features are important, enforcing sparsity can lead to a reduction in the prediction accuracy, due to the removal of potentially informative covariates.
+\end{enumerate}
 
 % subsection lasso (end)
 
 \subsection{Decision Tree Regression} % (fold)
 \label{sub:decision_tree_regression}
+
+Decision trees are a class of modeling algorithms based on simple graphs.
+Although more commonly thought of for their use in classification, tree-based methods can also be used for regression. 
+Decision trees work by recursively partitioning the feature space based on simple rules to bin observations into groups.
+To predict the value for a new, unseen observation, one simply needs to traverse the tree, following the rule at each node until it reaches a leaf of the tree (a bin).
+Once binned, a value can be predicted based on the training examples in that bin (e.g. the mean of the variable of interest for those samples).
+
+Some pros of decision tree regression are:
+\begin{enumerate}
+  \item Non-parametric learning: unlike linear regression, decision trees have no underlying parametric form, allowing them to learn non-linear relationships effectively.
+  \item Intuitive to understand: the decision tree can be visualized easily, the most important decision rules are close to the root of the tree, and the decision rules themselves tend to be very simple (e.g. ``is the k-th feature greater than 50? Yes or No.''), so tracing how samples are being binned is easy.
+  \item Minimal data preparation: trees operate on simple univariate comparisons, so standardization of variables, or special treatment for categorical variables is not necessary.
+\end{enumerate}
+
+Some cons of decision tree regression are:
+\begin{enumerate}
+  \item Risk of overfitting: if the depth of the tree is not controlled, decision trees will tend to overfit the training data, learning overly specific decision rules. This can be tempered by pruning the tree, or learning an optimal maximum depth based on cross validation.
+  \item Complex relationships are difficult to learn: basic trees only learn univariate decision rules. If a critical predictor depends on the relationship between two or more variables, a decision tree will have a hard time capturing that interaction.
+  \item Unstable tree generation: decision trees are relatively sensitive to the training data, and can learn different tree structures with a modest change in training data. This instability can be mitigated by ensemble based methods like random forests, which generate a number of decision trees based on random subsamples of the training data, which then aggregate their predictions together.
+\end{enumerate}
 
 % subsection decision_tree_regression (end)
 
