@@ -60,7 +60,7 @@ all_working.drop(364111, inplace=True)
 # keep X13 and try to impute
 all_working.drop(all_working.columns[[7, 17, 18]], axis=1, inplace=True)
 
-# also drop X23: in test set, dates are encoded differently, and appear to be missing year information, which is critical
+# also drop X23: in test set, dates are encoded differently, and some appear to be missing year information, which is critical
 all_working.drop('X23', axis=1, inplace=True)
 
 # potentially drop X15: in test set, dates are encoded differently, and it is unclear if the 15 refers to a date or a year.
@@ -124,6 +124,7 @@ def date_to_ordinal(series) :
     series_out = pd.Series(ordinals, index=series.index, name=series.name)
     return series_out
 
+# for X4, X5 and X6, note that they might be collinear. Also note that X6 <= X5 <= X4. Possibly encode as booleans denoting if they are equal or not?
 X1_clean = strip_prc(all_working['X1'])
 X4_clean = strip_dollar(all_working['X4'])
 X5_clean = strip_dollar(all_working['X5'])
@@ -376,7 +377,7 @@ ax2.set_xlabel('Simple OLS'); ax2.set_ylabel('DTree')
 ax3 = plt.subplot(133)
 ax3.plot(lasso_predictions, dtree_predictions, marker='o', linestyle='none')
 ax3.set_xlabel('LASSO'); ax3.set_ylabel('DTree')
-plt.show()
+# plt.show()
 
 # look at decision tree structure and decision rules for a shallow tree (full size tree is unwieldy to look at)
 import pydotplus

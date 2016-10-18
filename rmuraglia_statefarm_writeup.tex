@@ -34,7 +34,7 @@
   \setlength{\itemsep}{1pt}
   \setlength{\parskip}{0pt}
   \setlength{\parsep}{0pt}
-  \vspace{-2ex}
+  % \vspace{-2ex}
 }
 
 % macro for red text for annotating drafts
@@ -104,7 +104,40 @@ Some cons of decision tree regression are:
 \section{Design Choices} % (fold)
 \label{sec:design_choices}
 
-explain variable selection, transformations
+Although not necessary for the work assignment, I thought it would be useful to discuss some key design choices and assumptions I made when preparing the data to give more information for your evaluation.
+
+\subsection{Treatment of X15: ``Date loan was issued''} % (fold)
+\label{sub:treatment_of_x15_}
+This variable was encoded differently in the training and test sets. In the training set, it was encoded as ``Mon-XX'' where ``XX'' represented a year, and ``Mon'' a month. In the test set, X15 was encoded as ``XX-Mon'', where ``XX'' was always equal to 15. I worked under the assumption that the 15 in the test set referred to the year 2015.
+% subsection treatment_of_x15_ (end)
+
+\subsection{Treatment of X9: ``Loan subgrade''} % (fold)
+\label{sub:treatment_of_x9_}
+Because this variable appeared to be strongly predictive of income rate (see figure 1), I chose to impute the values using a more sophisticated scheme than using the mode, or using samples drawn randomly in proportions equal to those observed in the training set. 
+I calculated the group median X1 for each category in X9, then assigned missing X9 values to the nearest group median.
+Additionally, although this is a categorical variable, there is an implied ordering, and as such, I treated it as an ordinal variable, instead of an unordered categorical.
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.5]{X1_X9.png}
+  \caption{Interest rate vs. Loan subgrade in the training set}
+  \label{fig:figure1}
+\end{figure}
+% subsection treatment_of_x9_ (end)
+
+\subsection{X4, X5 and X6} % (fold)
+\label{sub:x4_x5_and_x6}
+These variables, representing various aspects of the loan amount (requested, funded and investor-funded portion, respectively), appeared to have some degree of collinearity. 
+I noted that X4 $\geq$ X5 $\geq$ X6, and as such we could encode X5 and X6 as boolean variables denoting their equality relationship to X4 and X5, respectively, which would provide an alternate perspective on the relationship between these variables.
+Ultimately, I chose to keep X4, X5 and X6 as is, due to their minor importance in both models.
+% subsection x4_x5_and_x6 (end)
+
+\subsection{Redundant features} % (fold)
+\label{sub:redundant_features}
+In this dataset there were two sets of clearly redundant features. 
+X8 and X9 represented loan grade and loan subgrade, respectively. As the subgrade provided more resolution for prediction, I chose to keep that feature.
+X19 and X20 both represented spatial information, but because X19 was on a zip code level resolution, it generated over 300 categories, which was overkill, so I chose to drop that feature.
+% subsection redundant_features (end)
 
 % section design_choices (end)
 

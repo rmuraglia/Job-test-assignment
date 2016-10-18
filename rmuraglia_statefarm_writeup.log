@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  17 OCT 2016 18:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  17 OCT 2016 22:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -640,29 +640,39 @@ File: siunitx-abbreviations.cfg 2015/01/21 v2.6e siunitx: Abbreviated units
 [1{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
+<X1_X9.png, id=13, 953.964pt x 341.8371pt>
+File: X1_X9.png Graphic file (type png)
+ <use X1_X9.png>
+Package pdftex.def Info: X1_X9.png used on input line 122.
+(pdftex.def)             Requested size: 476.98083pt x 170.91812pt.
 
+Overfull \hbox (7.22581pt too wide) in paragraph at lines 122--123
+ [][] 
+ []
+
+[2] 
 AED: lastpage setting LastPage
-[2] (./rmuraglia_statefarm_writeup.aux) ) 
+[3 <./X1_X9.png>] (./rmuraglia_statefarm_writeup.aux) ) 
 Here is how much of TeX's memory you used:
- 11999 strings out of 493089
- 246941 string characters out of 6134842
- 271890 words of memory out of 5000000
- 15382 multiletter control sequences out of 15000+600000
+ 12012 strings out of 493089
+ 247130 string characters out of 6134842
+ 271930 words of memory out of 5000000
+ 15393 multiletter control sequences out of 15000+600000
  9673 words of font info for 36 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,11n,43p,10427b,378s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2015/texmf-dist/font
-s/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2015/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2015/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmsy10.pfb>
-Output written on rmuraglia_statefarm_writeup.pdf (2 pages, 76837 bytes).
+ 39i,11n,43p,10427b,502s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2015/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2015/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2015/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2015/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on rmuraglia_statefarm_writeup.pdf (3 pages, 115993 bytes).
 PDF statistics:
- 39 PDF objects out of 1000 (max. 8388607)
- 27 compressed objects within 1 object stream
+ 45 PDF objects out of 1000 (max. 8388607)
+ 30 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
