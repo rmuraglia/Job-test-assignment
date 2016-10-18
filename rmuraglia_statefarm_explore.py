@@ -36,7 +36,7 @@ for col in all_raw.columns :
     raw_input('Press enter to proceed to the next variable... \n')
 
 # for some intuitively interesting/promising variables, make some exploratory plots
-# subset a random 10% sample for plotting
+# subset 5000 random draws for plotting
 mini_raw = all_raw.sample(n=5000)
 X1_plot = mini_raw['X1'].str.strip('%').astype('float')
 mini_raw['X1'] = X1_plot
@@ -188,7 +188,7 @@ ax6.set_title('log(Rev Bal)')
 plt.show()
 
 # check for collinearity between X4, X5 and X6 variables
-# appears strongly collinear. Note that X4 <= X5, X5<= X6
+# appears collinear. Note that X4 >= X5, X5 >= X6
 fig = plt.figure()
 ax1 = plt.subplot(131)
 ax1.plot(X4_plot, X5_plot, marker='o', linestyle='none')
