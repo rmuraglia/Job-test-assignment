@@ -1,7 +1,7 @@
-# rmuraglia_statefarm_code.py
+# rmuraglia_jobtest_code.py
 
 """
-Ryan Muraglia's code submission for State Farm data scientist work assignment
+Ryan Muraglia's code submission for [job application] coding assignment
 Testing period: Oct 13 2016 - Oct 18 2016
 """
 
@@ -18,7 +18,7 @@ from sklearn.metrics import mean_squared_error
 from datetime import datetime
 from datetime import timedelta
 
-data_dir = '~/Desktop/sftest/'
+data_dir = '~/Desktop/jobtest/'
 
 """
 Part 1: Clean and prepare data

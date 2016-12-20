@@ -1,7 +1,7 @@
-# rmuraglia_statefarm_explore.py
+# rmuraglia_jobtest_explore.py
 
 """
-Ryan Muraglia's code submission for State Farm data scientist work assignment
+Ryan Muraglia's code submission for [job application] coding assignment
 Testing period: Oct 13 2016 - Oct 18 2016
 """
 
@@ -10,7 +10,7 @@ import numpy as np # version 1.11.1
 import pandas as pd # version 0.18.1
 import matplotlib.pyplot as plt # version 1.3.1
 
-data_dir = '~/Desktop/sftest/'
+data_dir = '~/Desktop/jobtest/'
 
 """
 Part 0: Explore raw data
